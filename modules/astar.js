@@ -3,8 +3,10 @@ const MinHeap = require("../Classes/MinHeap");
 const sqrt2 = Math.sqrt(2);
 
 const euclidian = (matrixSec, start, goal) => {
-    if(!matrixSec instanceof MatrixSecundus) return new Error("enviroment data most be normalized as MatrixSecundus")
-    
+    return new Promise((resolve, reject) => {
+
+    if(!matrixSec instanceof MatrixSecundus) reject(new Error("enviroment data most be normalized as MatrixSecundus"))
+
     const h = (current, goal) => Math.hypot(Math.abs( current.x - goal.x ), Math.abs( current.y - goal.y ));
     const rows = matrixSec.length;
     const columns = matrixSec[0].length;
@@ -43,34 +45,6 @@ const euclidian = (matrixSec, start, goal) => {
             
         }
     }
-
-    return [{x:0,y:0}]
-    //resolve string if path not found
-    // if(!overlapAllowed){
-    //     //somthing about this
-    //     console.log("ASTAR ERROR: ",PATH_NOT_FOUND[0])
-    //     return [{x:0,y:0}]
-    // } else {
-    //     console.log("ASTAR ERROR: ", PATH_NOT_FOUND[1])
-    //     //reject here?
-    //     return [{x:0,y:0}]
-    // }   
-
-    function distance (current, neighbor){
-        if(
-            current.x === neighbor.x + 1 && current.y === neighbor.y + 1 ||
-            current.x === neighbor.x + 1 && current.y === neighbor.y - 1 ||
-            current.x === neighbor.x - 1 && current.y === neighbor.y + 1 ||
-            current.x === neighbor.x - 1 && current.y === neighbor.y - 1 
-        ){
-            return sqrt2;
-        } else {
-            return 1;
-        }
-    }
-
-    
-
     function getNeighbors({x, y}){
         // maybe make obstacles infinite distance?
         const neighbors = [];
@@ -102,10 +76,13 @@ const euclidian = (matrixSec, start, goal) => {
     
         return neighbors;
     }
+    })
 };
 
-const manhattam = ( matrixSec, start, goal ) => {  
-    if(!matrixSec instanceof MatrixSecundus) return new Error("enviroment data most be normalized as MatrixSecundus");
+const manhattam = ( matrixSec, start, goal ) => {
+    return new Promise((resolve, reject) => {
+   
+    if(!matrixSec instanceof MatrixSecundus) reject(new Error("enviroment data most be normalized as MatrixSecundus"));
 
     const h = (current, goal) => Math.abs(current.x - goal.x) + Math.abs(current.y - goal.y);
     const rows = matrixSec.length;
@@ -116,8 +93,7 @@ const manhattam = ( matrixSec, start, goal ) => {
     matrixSec[start.y][start.x].g = 0
     matrixSec[start.y][start.x].f = h( start, goal )
 
-    openSet.insert(matrixSec[start.y][start.x])
-    console.log("OPEN SET = ", openSet);
+    openSet.insert(matrixSec[start.y][start.x]);
 
     while(openSet.getMin()){
         const current = openSet.getMin();
@@ -177,6 +153,8 @@ const manhattam = ( matrixSec, start, goal ) => {
         }
         return neighbors;
     }
+         
+    })
 }
 
 function distance (current, neighbor){
