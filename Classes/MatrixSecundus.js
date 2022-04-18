@@ -12,9 +12,9 @@ module.exports = class MatrixSecundus {
             for(let j = 0; j < width; j ++){
                 //obstacle check
                 if(mp[i][j].phi === "o"){
-                    rows[i] = new Point({x: j, y: i}, true)
+                    rows[j] = new Point({x: j, y: i}, true)
                 } else {
-                    rows[i] = new Point({x: j, y: i}, false)
+                    rows[j] = new Point({x: j, y: i}, false)
                 }
             }
             matrix[i] = rows;
