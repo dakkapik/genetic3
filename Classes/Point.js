@@ -5,7 +5,7 @@ module.exports = class Point {
     //h = heuristic
     constructor (pos, o){
         this.pos = pos;
-        this.o = o;
+        this.obstacle = o;
         this.f = Infinity;
         this.g = Infinity;
         this.h;

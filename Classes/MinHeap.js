@@ -16,10 +16,10 @@ module.exports = class MinHeap {
     insert( node ) {
         this.heap.push(node)
         if(this.heap.length > 1){
-            let current = this.heap.length = 1;
+            let current = this.heap.length - 1
 
-            while(current > 1 && this.heap[Math.floor(current /2)].f > this.heap[current].f) {
-                [this.heap[Math.floor(current/2)], this.heap[current]] = [this.heap[curretn], this.heap[Math.floor(current/2)]]
+            while(current > 1 && this.heap[Math.floor(current/2)].f > this.heap[current].f){
+                [this.heap[Math.floor(current/2)], this.heap[current]] = [this.heap[current], this.heap[Math.floor(current/2)]]
                 current = Math.floor(current/2)
             }
         }
